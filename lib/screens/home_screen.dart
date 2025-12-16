@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: CustomElevatedButton(
               text: "Explore ${planet.planetName}",
               onPressed: () {
-                Navigator.pushNamed(context,PlanetInfoScreen.routeName,arguments: planet.planetName );
+                Navigator.pushNamed(context,PlanetInfoScreen.routeName,arguments: [planet.planetName,planet.imagePath] );
               },
             ),
           ),
