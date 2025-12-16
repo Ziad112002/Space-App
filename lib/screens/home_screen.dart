@@ -8,6 +8,8 @@ import 'package:space/widgets/arrow_button.dart';
 import 'package:space/widgets/space_gradient.dart';
 import '../planet_data.dart';
 import '../widgets/custom_elevatedbutton.dart';
+import '../widgets/planet_app_bar.dart';
+
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home_screen";
   const HomeScreen({super.key});
@@ -36,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     loadPlanetsData();
   }
+
   void loadPlanetsData() async {
     planetsData = await loadPlanets();
     setState(() {});
@@ -50,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void _onPagedChange(int index) {
     setState(() {
       _currentPage = index;
-
     });
   }
 
@@ -76,10 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SpaceGradient(
       body: Column(
-
         children: [
-          buildAppBar(),
-          SizedBox(height: 30),
+          PlanetAppBar(),
           Expanded(
             child: PageView.builder(
               controller: _pageController,
@@ -92,32 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  Widget buildAppBar() {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.only(left: 20, right: 69, top: 30),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppAsset.homeBg),
-          fit: BoxFit.fill,
-        ),
-      ),
-      child: Column(
-        children: [
-          Text("Explore", style: AppTextStyle.white20semiBold),
-          SizedBox(height: 103),
-          Row(
-            children: [
-              Text(
-                "Which planet\nwould you like to explore?",
-                style: AppTextStyle.white20semiBold,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget buildPlanetAsset(PlanetModel planet) {
     return Container(
@@ -125,10 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
       margin: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
+          Expanded(flex: 7, child: Image(image: AssetImage(planet.imagePath))),
           Expanded(
-            flex: 7,
-              child: Image(image: AssetImage(planet.imagePath))),
-          Expanded( flex: 2,
+            flex: 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -153,7 +126,11 @@ class _HomeScreenState extends State<HomeScreen> {
             child: CustomElevatedButton(
               text: "Explore ${planet.planetName}",
               onPressed: () {
-                Navigator.pushNamed(context,PlanetInfoScreen.routeName,arguments: [planetsData[_currentPage],planet.imagePath] );
+                Navigator.pushNamed(
+                  context,
+                  PlanetInfoScreen.routeName,
+                  arguments: [planetsData[_currentPage], planet.imagePath],
+                );
               },
             ),
           ),
@@ -162,3 +139,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
