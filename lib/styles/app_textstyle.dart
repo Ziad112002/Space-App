@@ -15,10 +15,17 @@ abstract final class AppTextStyle {
     fontSize: 24,
     color: AppColor.white,
     fontWeight: FontWeight.w700,
+
+  );
+  static const TextStyle white16ExtraBold = TextStyle(
+    fontSize: 16,
+    color: AppColor.white,
+    fontWeight: FontWeight.w800,
   );
   static const TextStyle white16light = TextStyle(
     fontSize: 16,
     color: AppColor.white,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
   );
+
 }

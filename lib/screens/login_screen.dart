@@ -10,6 +10,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpaceGradient(
+      isPadding: true,
       isImage: true,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
