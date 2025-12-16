@@ -6,6 +6,7 @@ import 'package:space/styles/app_color.dart';
 import 'package:space/styles/app_textStyle.dart';
 import 'package:space/widgets/arrow_button.dart';
 import 'package:space/widgets/space_gradient.dart';
+import '../planet_data.dart';
 import '../widgets/custom_elevatedbutton.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home_screen";
@@ -17,17 +18,29 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
   final List<PlanetModel> planets = [
-    PlanetModel(imagePath: AppAsset.earth, planetName: "Earth"),
-    PlanetModel(imagePath: AppAsset.mars, planetName: "Mars"),
     PlanetModel(imagePath: AppAsset.sun, planetName: "Sun"),
     PlanetModel(imagePath: AppAsset.mercury, planetName: "Mercury"),
+    PlanetModel(imagePath: AppAsset.venus, planetName: "Venus"),
+    PlanetModel(imagePath: AppAsset.earth, planetName: "Earth"),
+    PlanetModel(imagePath: AppAsset.mars, planetName: "Mars"),
+    PlanetModel(imagePath: AppAsset.jupiter, planetName: "Jupiter"),
     PlanetModel(imagePath: AppAsset.saturn, planetName: "Saturn"),
     PlanetModel(imagePath: AppAsset.uranus, planetName: "Uranus"),
-    PlanetModel(imagePath: AppAsset.venus, planetName: "Venus"),
     PlanetModel(imagePath: AppAsset.neptune, planetName: "Neptune"),
   ];
 
   int _currentPage = 0;
+  List<PlanetDetailsModel> planetsData = [];
+  @override
+  void initState() {
+    super.initState();
+    loadPlanetsData();
+  }
+  void loadPlanetsData() async {
+    planetsData = await loadPlanets();
+    setState(() {});
+  }
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -140,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: CustomElevatedButton(
               text: "Explore ${planet.planetName}",
               onPressed: () {
-                Navigator.pushNamed(context,PlanetInfoScreen.routeName,arguments: [planet.planetName,planet.imagePath] );
+                Navigator.pushNamed(context,PlanetInfoScreen.routeName,arguments: [planetsData[_currentPage],planet.imagePath] );
               },
             ),
           ),

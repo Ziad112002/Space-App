@@ -4,7 +4,7 @@ import 'package:space/models/planet_model.dart';
 
 Future<List<PlanetDetailsModel>> loadPlanets() async {
   final csvData = await rootBundle.loadString(
-    'assets/data/solar_system.csv',
+    'assets/data/Solar System Data - Sheet1.csv',
   );
 
   final rows = const CsvToListConverter().convert(csvData);
@@ -14,16 +14,16 @@ Future<List<PlanetDetailsModel>> loadPlanets() async {
     planets.add(
       PlanetDetailsModel(
         name: rows[i][0],
-        title: rows[i][1],
-        about: rows[i][2],
-        image: rows[i][3],
-        distance: rows[i][4].toString(),
-        dayLength: rows[i][5].toString(),
-        orbitalPeriod: rows[i][6].toString(),
-        radius: rows[i][7].toString(),
-        mass: rows[i][8].toString(),
-        gravity: rows[i][9].toString(),
-        surfaceArea: rows[i][10].toString(),
+        title: rows[i][3],
+        about: rows[i][4],
+        image: rows[i][2],
+        distance: rows[i][5].toString(),
+        dayLength: rows[i][6].toString(),
+        orbitalPeriod: rows[i][7].toString(),
+        radius: rows[i][8].toString(),
+        mass: rows[i][9].toString(),
+        gravity: rows[i][10].toString(),
+        surfaceArea: rows[i][11].toString(),
       ),
     );
   }

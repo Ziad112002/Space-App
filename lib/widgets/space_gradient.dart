@@ -16,7 +16,7 @@ class SpaceGradient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: isPadding ? EdgeInsets.only(right: 16, left: 16, bottom: 8) : null,
+      padding: isPadding ? EdgeInsets.only(right: 12, left: 12, bottom: 8) : null,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
         color: AppColor.black,
